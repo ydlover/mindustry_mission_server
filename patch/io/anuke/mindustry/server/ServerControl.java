@@ -23,7 +23,6 @@ import io.anuke.mindustry.net.Packets.KickReason;
 import io.anuke.mindustry.type.Item;
 import io.anuke.mindustry.type.ItemType;
 import io.anuke.mindustry.content.Zones;
-
 import java.io.*;
 import java.net.*;
 import java.time.LocalDateTime;
@@ -48,7 +47,6 @@ public class ServerControl implements ApplicationListener{
 
     private Thread socketThread;
     private PrintWriter socketOutput;
-
     public ServerControl(String[] args){
         Core.settings.defaults(
             "shufflemode", "normal",
@@ -174,6 +172,8 @@ public class ServerControl implements ApplicationListener{
         });
 
         info("&lcServer loaded. Type &ly'help'&lc for help.");
+info("modify 5-5 by ydlover ...");
+info("选择战役地图请输入(host 数字 mission):\n零号地区groundZero(0),desertWastes(1),陨石地带craters(2),冰冻森林frozenForest(3), 毁灭海岸ruinousShores(4),绵延群山stainedMountains(5),tarFields(6),saltFlats(7), overgrowth(8), infestedIslands(9),荒芜裂谷desolateRift(10),核能生产nuclearComplex(11)");
         System.out.print("> ");
 
         if(Core.settings.getBool("socket")){
@@ -214,15 +214,36 @@ public class ServerControl implements ApplicationListener{
             }
 
             if(lastTask != null) lastTask.cancel();
-info("modify 5-5 by ydlover ..."+arg[1]);
 if(arg.length>1 && "mission".equalsIgnoreCase(arg[1])){
-            info("Loading mission by ydlover ...");
+logic.reset();
+try{
+Zones zs=new Zones();
 
-            logic.reset();
-            try{
-                Zones zs=new Zones();
-                world.playZone(Zones.nuclearComplex);
-
+if("0".equalsIgnoreCase(arg[0])){
+world.playZone(Zones.groundZero);
+}else if ("1".equalsIgnoreCase(arg[0])){
+world.playZone(Zones.desertWastes);
+}else if ("2".equalsIgnoreCase(arg[0])){
+world.playZone(Zones.craters);
+}else if ("3".equalsIgnoreCase(arg[0])){
+world.playZone(Zones.frozenForest);
+}else if ("4".equalsIgnoreCase(arg[0])){
+world.playZone(Zones.ruinousShores);
+}else if ("5".equalsIgnoreCase(arg[0])){
+world.playZone(Zones.stainedMountains);
+}else if ("6".equalsIgnoreCase(arg[0])){
+world.playZone(Zones.tarFields);
+}else if ("7".equalsIgnoreCase(arg[0])){
+world.playZone(Zones.saltFlats);
+}else if ("8".equalsIgnoreCase(arg[0])){
+world.playZone(Zones.overgrowth);
+}else if ("9".equalsIgnoreCase(arg[0])){
+world.playZone(Zones.infestedIslands);
+}else if ("10".equalsIgnoreCase(arg[0])){
+world.playZone(Zones.desolateRift);
+}else{
+world.playZone(Zones.nuclearComplex);
+}
 
                 info("Map loaded.");
 
